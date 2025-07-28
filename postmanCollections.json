@@ -1,0 +1,167 @@
+
+{
+  "info": {
+    "_postman_id": "2f3d5791-a809-4b6c-9c72-abc123456789",
+    "name": "SupportTicketingSystem",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/auth",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"regularuser\",\n    \"password\": \"123456\",\n    \"role\": \"user\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"regularuser\",\n    \"password\": \"123456\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Create Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/tickets",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["tickets"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Login Issue\",\n  \"issue\": \"Cannot log in to my account\",\n  \"priority\": \"high\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get My Tickets",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/tickets/{{userId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["tickets", "{{userId}}"]
+        }
+      }
+    },
+    {
+      "name": "Admin: Get All Tickets",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/admin/tickets",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["admin", "tickets"]
+        }
+      }
+    },
+    {
+      "name": "Admin: Update Ticket Status",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/tickets/{{ticketId}}/update",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["tickets", "{{ticketId}}", "status"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"closed\"\n}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "ticketId",
+      "value": ""
+    }
+  ]
+}
